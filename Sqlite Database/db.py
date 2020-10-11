@@ -1,6 +1,8 @@
 import sqlite3
+
 con = sqlite3.connect("library.db")
 cursor = con.cursor()
+
 def create_table():
     cursor.execute("CREATE TABLE IF NOT EXISTS library (name TEXT, author TEXT,book_name TEXT,page INT)")
     con.commit()
@@ -25,14 +27,25 @@ def get_data3(name):
     list1 = cursor.fetchall()
     for i in list1:
         print(i)
+def update_data(new_page):
+    cursor.execute("UPDATE library set page = ? where page = ?",(561,new_page))
+    con.commit()
+def delete_data(name):
+    cursor.execute("Delete  From library where name = ?", (name,))
+    con.commit()
 
 #name = input("Name:")
 #author = input("Author:")
 #book_name = input("Book name:")
 #page =  int(input("Page:"))
 
-#get_data()
 # add_input(name,author,book_name,page)
+
+#get_data()
 #get_data2()
-get_data3("İstanbul Hatırası")
+#get_data3("İstanbul Hatırası")
+
+delete_data("Tacettin")
+get_data()
+
 con.close()
